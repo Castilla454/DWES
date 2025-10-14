@@ -1,0 +1,25 @@
+<?php
+// PASO POR VALOR (Fotocopia)
+function duplicarValor(int $numero)
+{
+    $numero = $numero * 2;
+    echo "Dentro de la función, el número es: $numero\n";
+}
+
+$miNumero = 10;
+duplicarValor($miNumero);
+echo "Fuera de la función, el número sigue siendo: $miNumero\n"; // Imprime 10
+
+echo "<hr>";
+
+// PASO POR REFERENCIA (Original)
+function duplicarReferencia(&$numero)
+{
+    $numero = $numero * 2;
+    echo "Dentro de la función, el número es: $numero\n";
+}
+
+$otroNumero = 10;
+duplicarReferencia($otroNumero);
+echo "Fuera de la función, el número HA CAMBIADO a: $otroNumero\n"; // Imprime 20
+?>
