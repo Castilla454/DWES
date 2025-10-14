@@ -26,11 +26,25 @@ public function getRecargo(): float{
 
 }
 
+public function aplicarRecargo(){
+	
+	
+	$this->precioDia = $this->precioDia + ($this->precioDia * $this->recargo);
+	
+	
+	
+}
 
 
 
-
-
+public function getPrecioDia():float{
+	
+	
+	return $this->precioDia;
+	
+	
+	
+}
 
 
 
