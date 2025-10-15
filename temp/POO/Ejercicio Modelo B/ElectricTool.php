@@ -1,52 +1,30 @@
 <?php 
 
-requires_once = 'Tool.php';
+require_once 'Tool.php';
 
-public class ElectricTool extends Tool{
+class ElectricTool extends Tool {
+    
+    private string $potencia;
 
+    public function __construct(
+        string $sku, 
+        string $nombre, 
+        float $precioDia, 
+        string $descripcion,
+        string $potencia
+    ) {
+        parent::__construct($sku, $nombre, $precioDia, $descripcion);
+        $this->potencia = $potencia;
+    }
 
-public function __construct(
-string $Sku, 
-string $nombre, 
-float $precioDia, 
-float $recargo){
-	parent::__construct($Sku,$nombre,$precioDia);
-	
-	
+    public function getPrecioDia(): float {
+       
+        return $this->precioDia * 1.25;
+    }
+
+    public function getPotencia(): string {
+        return $this->potencia;
+    }
 }
-
-public function getRecargo(): float{
-	
-	
-	return $this->recargo;
-	
-}
-
-
-
-}
-
-public function aplicarRecargo(){
-	
-	
-	$this->precioDia = $this->precioDia + ($this->precioDia * $this->recargo);
-	
-	
-	
-}
-
-
-
-public function getPrecioDia():float{
-	
-	
-	return $this->precioDia;
-	
-	
-	
-}
-
-
-
 
 ?>

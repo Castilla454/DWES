@@ -1,16 +1,13 @@
 <?php   
 
-requires_once = 'Tool.php';
+require_once 'Tool.php';
 
-public class ManualTool extends Tool{
+class ManualTool extends Tool {
 
-
-
-
+    public function getPrecioDia(): float {
+        
+        return $this->precioDia;
+    }
 }
-
-
-
-
 
 ?>
