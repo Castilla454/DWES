@@ -2,39 +2,25 @@
 
 class Contact
 {
-
     private string $name;
     private string $email;
     private string $phone;
-
     private string $avatarPath;
-
     private string $avatarName;
+    public bool $favorite; 
 
-    private bool $favorite;
-
-
-    public function __construct(string $name, string $email, string $phone, string $avatarPath,bool $favorite)
+    public function __construct(string $name, string $email, string $phone = '', string $avatarPath = '', string $avatarName = '')
     {
-
-
         $this->name = $name;
         $this->email = $email;
         $this->phone = $phone;
         $this->avatarPath = $avatarPath;
-        $this->favorite = $favorite;
-
-
-
-
-
+        $this->avatarName = $avatarName;
+        $this->favorite = false; 
     }
-
-
 
     public function getName(): string
     {
-
         return $this->name;
     }
 
@@ -45,41 +31,38 @@ class Contact
 
     public function getPhone(): string
     {
-
         return $this->phone;
     }
 
-
     public function getAvatarPath(): string
     {
-
         return $this->avatarPath;
     }
 
 
-    public function toggleFavorite(bool $favorite): void
+    public function getFavorite(): bool{
+        return $this->favorite;
+    }
+    public function getAvatarName(): string
     {
-
-        if ($favorite) {
-            $this->favorite = true;
-
-        } else {
-
-            $this->favorite = false;
-        }
-
-
+        return $this->avatarName;
     }
 
+    public function toggleFavorite(): void
+    {
+        $this->favorite = !$this->favorite; 
+    }
 
-
-    public function getSummary(): string{
-
-
-        return $this->name ." ". $this->email ." ". $this->phone ." ". $this->avatarPath;
-
-
-
+    public function getSummary(): string
+    {
+        $summary = "Nombre: " . $this->name . " | Email: " . $this->email;
+        
+        if (!empty($this->phone)) {
+            $summary .= " | Teléfono: " . $this->phone;
+        }
+        
+        
+        return $summary;
     }
 }
 

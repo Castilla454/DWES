@@ -78,34 +78,34 @@
                     $contacts = $filteredContacts ?? $_SESSION['contacts'];
                     foreach ($contacts as $index => $contact): 
                     ?>
-                        <div class="contact-card <?php echo $contact->favorite ? 'favorite' : ''; ?>">
-                            <a href="index.php?action=toggle_fav&i=<?php echo $index; ?>" class="favorite-btn">
-                                <?php echo $contact->favorite ? '⭐' : '☆'; ?>
+                        <div class="contact-card <?php echo $contact->getFavorite() ? 'favorite' : ''; ?>">
+                            <a href="index.php?action=toggle_fav&i=<?php echo $index; ?><?php echo isset($_GET['q']) && $_GET['q'] !== '' ? '&q=' . urlencode($_GET['q']) : ''; ?>" class="favorite-btn">
+                                <?php echo $contact->getFavorite() ? '⭐' : '☆'; ?>
                             </a>
 
                             <div class="contact-header">
-                                <?php if ($contact->avatarPath): ?>
-                                    <img src="<?php echo htmlspecialchars($contact->avatarPath); ?>" 
-                                         alt="Avatar de <?php echo htmlspecialchars($contact->name); ?>" 
+                                <?php if ($contact->getAvatarPath()): ?>
+                                    <img src="<?php echo htmlspecialchars($contact->getAvatarPath()); ?>" 
+                                         alt="Avatar de <?php echo htmlspecialchars($contact->getName()); ?>" 
                                          class="avatar">
                                 <?php else: ?>
                                     <div class="avatar-placeholder">
-                                        <?php echo strtoupper(substr($contact->name, 0, 1)); ?>
+                                        <?php echo strtoupper(substr($contact->getName(), 0, 1)); ?>
                                     </div>
                                 <?php endif; ?>
 
                                 <div class="contact-info">
-                                    <h3><?php echo htmlspecialchars($contact->name); ?></h3>
-                                    <?php if ($contact->favorite): ?>
+                                    <h3><?php echo htmlspecialchars($contact->getName()); ?></h3>
+                                    <?php if ($contact->getFavorite()): ?>
                                         <span style="color: #ffc107; font-size: 0.9em;">★ Favorito</span>
                                     <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="contact-details">
-                                <p><strong>📧 Email:</strong> <?php echo htmlspecialchars($contact->email); ?></p>
-                                <?php if ($contact->phone): ?>
-                                    <p><strong>📱 Teléfono:</strong> <?php echo htmlspecialchars($contact->phone); ?></p>
+                                <p><strong>📧 Email:</strong> <?php echo htmlspecialchars($contact->getEmail()); ?></p>
+                                <?php if ($contact->getPhone()): ?>
+                                    <p><strong>📱 Teléfono:</strong> <?php echo htmlspecialchars($contact->getPhone()); ?></p>
                                 <?php endif; ?>
                             </div>
 
