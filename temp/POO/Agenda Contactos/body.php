@@ -1,3 +1,4 @@
+<body>
 <div class="container">
     <header>
         <h1>📇 Agenda de Contactos</h1>
@@ -51,7 +52,7 @@
             <h2 style="color: #333; margin-bottom: 15px;">🔍 Buscar Contactos</h2>
             <form method="GET" action="index.php" class="search-form">
                 <input type="text" name="q" placeholder="Buscar por nombre..." 
-                       value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : (isset($_COOKIE['last_search']) ? htmlspecialchars($_COOKIE['last_search']) : ''); ?>">
+                       value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>">
                 <button type="submit" class="btn btn-search">Buscar</button>
             </form>
         </div>
@@ -75,7 +76,8 @@
             <?php else: ?>
                 <div class="contacts-grid">
                     <?php 
-                    $contacts = $filteredContacts ?? $_SESSION['contacts'];
+                    // Si $filteredContacts está vacío, mostrar todos los contactos de la sesión.
+                    $contacts = !empty($filteredContacts) ? $filteredContacts : ($_SESSION['contacts'] ?? []);
                     foreach ($contacts as $index => $contact): 
                     ?>
                         <div class="contact-card <?php echo $contact->getFavorite() ? 'favorite' : ''; ?>">
@@ -119,3 +121,4 @@
         </div>
     </div>
 </div>
+</body>

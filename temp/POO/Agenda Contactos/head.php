@@ -267,4 +267,3 @@
         }
     </style>
 </head>
-<body></body>

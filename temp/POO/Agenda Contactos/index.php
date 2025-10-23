@@ -1,8 +1,7 @@
 <?php
 require_once "Contact.php";
 session_start();
-
-
+//session_unset();
 
 
 if (!isset($_SESSION['contacts']) || !is_array($_SESSION['contacts'])) {
@@ -120,13 +119,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_contact'])) {
 if (isset($_GET['action']) && $_GET['action'] === 'toggle_fav' && isset($_GET['i'])) {
     $i = filter_var($_GET['i'], FILTER_VALIDATE_INT);
     if ($i !== false && isset($_SESSION['contacts'][$i])) {
+    
         $_SESSION['contacts'][$i]->toggleFavorite();
-
-        $location = 'index.php';
-        if (isset($_GET['q']) && trim($_GET['q']) !== '') {
-            $location .= '?q=' . urlencode(trim($_GET['q']));
-        }
-        header('Location: ' . $location);
+     
+        header('Location: index.php');
         exit;
     }
 }
@@ -138,8 +134,8 @@ if (isset($_GET['q']) && trim($_GET['q']) !== '') {
     setcookie('last_search', $q, time() + 3600);
     foreach ($_SESSION['contacts'] as $idx => $contact) {
         if (stripos($contact->getName(), $q) !== false) {
-            $filteredContacts[$idx] = $contact; // preserve session index
-            break; // only first match
+            $filteredContacts[$idx] = $contact; 
+            break; 
         }
     }
 } elseif (!isset($_GET['q']) && isset($_COOKIE['last_search']) && trim($_COOKIE['last_search']) !== '') {
